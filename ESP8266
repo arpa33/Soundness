@@ -1,0 +1,32 @@
+// Smart Sensor Shower System
+// GitLab Project Example
+
+const int pirPin = 2;      // PIR sensor pin
+const int relayPin = 8;    // Relay control pin
+
+unsigned long lastMotionTime = 0;
+const unsigned long timeout = 30000; // 30 seconds timeout
+
+void setup() {
+  pinMode(pirPin, INPUT);
+  pinMode(relayPin, OUTPUT);
+  digitalWrite(relayPin, LOW); // Shower OFF initially
+  Serial.begin(9600);
+}
+
+void loop() {
+  int motionDetected = digitalRead(pirPin);
+
+  if (motionDetected == HIGH) {
+    Serial.println("Motion detected - Shower ON");
+    digitalWrite(relayPin, HIGH);
+    lastMotionTime = millis();
+  }
+
+  if (millis() - lastMotionTime > timeout) {
+    Serial.println("No motion - Shower OFF");
+    digitalWrite(relayPin, LOW);
+  }
+
+  delay(200);
+}
