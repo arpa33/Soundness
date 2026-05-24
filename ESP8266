@@ -30,3 +30,8 @@ void loop() {
 
   delay(200);
 }
+
+  if (motionDetected == HIGH) {
+    Serial.println("Motion detected - Shower ON");
+    digitalWrite(relayPin, HIGH);
+    lastMotionTime = millis();
