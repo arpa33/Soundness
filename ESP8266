@@ -7,21 +7,15 @@ const int relayPin = 8;    // Relay control pin
 unsigned long lastMotionTime = 0;
 const unsigned long timeout = 30000; // 30 seconds timeout
 
-void setup() {
+void loop() {
+  int motionDetected = digitalRead(pirPin);
+
+ void setup() {
   pinMode(pirPin, INPUT);
   pinMode(relayPin, OUTPUT);
   digitalWrite(relayPin, LOW); // Shower OFF initially
   Serial.begin(9600);
 }
-
-void loop() {
-  int motionDetected = digitalRead(pirPin);
-
-  if (motionDetected == HIGH) {
-    Serial.println("Motion detected - Shower ON");
-    digitalWrite(relayPin, HIGH);
-    lastMotionTime = millis();
-  }
 
 void setup() {
   pinMode(pirPin, INPUT);
