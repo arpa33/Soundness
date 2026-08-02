@@ -25,6 +25,10 @@ void setup() {
   if (millis() - lastMotionTime > timeout) {
     Serial.println("No motion - Shower OFF");
     digitalWrite(relayPin, LOW);
+  pinMode(pirPin, INPUT);
+  pinMode(relayPin, OUTPUT);
+  digitalWrite(relayPin, LOW); // Shower OFF initially
+  Serial.begin(9600);
   }
 
   delay(200);
